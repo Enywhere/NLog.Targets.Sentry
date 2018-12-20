@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace>NLog.Targets.Sentry</RootNamespace>
-    <AssemblyName>NLog.Targets.Sentry3</AssemblyName>
+    <AssemblyName>NLog.Targets.Sentry5</AssemblyName>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -12,8 +12,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <Version>1.0.1</Version>
     <Authors>Bjarne Riis, Mike Dempster, Thomas Willson (Curtis Instruments), Enywhere</Authors>
     <PackageLicenseUrl>https://github.com/Enywhere/NLog.Targets.Sentry/blob/master/License.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Enywhere/NLog.Targets.Sentry</PackageProjectUrl>
@@ -24,7 +24,7 @@
     <RepositoryUrl>https://github.com/Enywhere/NLog.Targets.Sentry</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>NLog.Targets.Sentry5</Product>
-    <FileVersion>1.0.0.0</FileVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <PackageId>NLog.Targets.Sentry5</PackageId>
   </PropertyGroup>
 
