@@ -23,11 +23,12 @@ namespace NLog.Targets
         private readonly Lazy<IRavenClient> client;
         private VersionNumberType versionNumberType = Targets.VersionNumberType.AssemblyVersion;
         private static readonly Assembly RootAssembly;
+		private string environment;
 
-        /// <summary>
-        /// Map of NLog log levels to Raven/Sentry log levels
-        /// </summary>
-        protected static readonly IDictionary<LogLevel, ErrorLevel> LoggingLevelMap = new Dictionary<LogLevel, ErrorLevel>
+		/// <summary>
+		/// Map of NLog log levels to Raven/Sentry log levels
+		/// </summary>
+		protected static readonly IDictionary<LogLevel, ErrorLevel> LoggingLevelMap = new Dictionary<LogLevel, ErrorLevel>
         {
             { LogLevel.Debug, ErrorLevel.Debug },
             { LogLevel.Error, ErrorLevel.Error },
@@ -96,9 +97,9 @@ namespace NLog.Targets
         [RequiredParameter]
         public string Dsn
         {
-            get { return this.dsn?.ToString(); }
-            set { this.dsn = new Dsn(value); }
-        }
+            get => this.dsn?.ToString();
+			set => this.dsn = new Dsn(value);
+		}
 
         /// <summary>
         /// Gets or sets the minimum log level required to trigger a Sentry event.
@@ -112,15 +113,31 @@ namespace NLog.Targets
             set => minLogLevelForEvent = LogLevel.FromString(value);
         }
 
-        /// <summary>
-        /// Gets or sets the environment name to send with the event logs.
-        /// </summary>
-        public string Environment { get; set; }
+		/// <summary>
+		/// Gets or sets the environment name to send with the event logs.
+		/// </summary>
+		public string Environment
+		{
+			get => environment;
+			set
+			{
+				if (string.IsNullOrWhiteSpace(value))
+				{
+					var env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        /// <summary>
-        /// Gets or sets the type of version number to send with the logs.
-        /// </summary>
-        public string VersionNumberType
+					environment = !string.IsNullOrEmpty(env) ? env : "develop";
+				}
+				else
+				{
+					environment = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the type of version number to send with the logs.
+		/// </summary>
+		public string VersionNumberType
         {
             get => versionNumberType.ToString();
             set => versionNumberType = (VersionNumberType)Enum.Parse(typeof(VersionNumberType), value);
@@ -252,9 +269,7 @@ namespace NLog.Targets
         {
             if (disposing && this.client.IsValueCreated)
             {
-                var ravenClient = this.client.Value as RavenClient;
-
-                if (ravenClient != null)
+				if (this.client.Value is RavenClient ravenClient)
                 {
                     ravenClient.ErrorOnCapture = null;
                 }
@@ -274,13 +289,8 @@ namespace NLog.Targets
                 ErrorOnCapture = this.LogException,
                 Timeout = this.clientTimeout,
                 Environment = this.Environment,
-                Release = GetVersion(),
+                Release = GetVersion()
             };
-
-            if (string.IsNullOrWhiteSpace(ravenClient.Environment))
-            {
-                ravenClient.Environment = "develop";
-            }
 
             if (TimeSpan.Zero == ravenClient.Timeout)
             {
