@@ -12,20 +12,20 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
-    <Version>3.2.0-alpha01</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
     <Authors>Bjarne Riis, Mike Dempster, Thomas Willson (Curtis Instruments), Enywhere</Authors>
-    <PackageLicenseUrl>https://github.com/CurtisInstruments/NLog.Targets.Sentry/blob/master/License.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/CurtisInstruments/NLog.Targets.Sentry</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Enywhere/NLog.Targets.Sentry/blob/master/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Enywhere/NLog.Targets.Sentry</PackageProjectUrl>
     <Description>Custom target for NLog enabling you to send logging messages to the Sentry logging service.</Description>
     <PackageTags>NLog Sentry Log Logging</PackageTags>
-    <PackageReleaseNotes>- Allow NLog to handle exceptions (retry/fallback) (#1)
-- Reduced memory allocation when handling LogEvent Properties (When no exception) (#1)
-- Added handling of null-values in LogEvent Properties. (#1)
-- Added environment getter and its loading from environment variables if null.</PackageReleaseNotes>
-    <Company>Curtis Instruments</Company>
-    <RepositoryUrl>https://github.com/CurtisInstruments/NLog.Targets.Sentry</RepositoryUrl>
+    <PackageReleaseNotes>- Added environment getter and its loading from environment variables if null.</PackageReleaseNotes>
+    <Company></Company>
+    <RepositoryUrl>https://github.com/Enywhere/NLog.Targets.Sentry</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Product>NLog.Targets.Sentry5</Product>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageId>NLog.Targets.Sentry5</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
