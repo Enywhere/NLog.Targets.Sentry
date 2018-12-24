@@ -118,7 +118,15 @@ namespace NLog.Targets
 		/// </summary>
 		public string Environment
 		{
-			get => environment;
+			get
+			{
+				if (!string.IsNullOrEmpty(environment))
+					return environment;
+				var env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+				environment = !string.IsNullOrEmpty(env) ? env : "develop";
+				return environment;
+			}
 			set
 			{
 				if (string.IsNullOrWhiteSpace(value))
